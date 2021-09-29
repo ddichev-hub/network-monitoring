@@ -1,6 +1,6 @@
 # network-monitoring
 
-Example for monitoring SAOS 10x devices via GRPC with Telegraf, InfluxDB and Grafana
+Testing monitoring devices via GRPC with Telegraf, InfluxDB and Grafana
 
 The example has dummy IPs and doesn't include client certificates. 
 
