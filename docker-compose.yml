@@ -1,8 +1,10 @@
-version: '3.6'
 services:
   telegraf:
     #image: telegraf:1.18-alpine
     image: telegraf:1.20-alpine
+    #image: telegraf:latest
+    container_name: ciena_telegraf
+    env_file: configuration.env
     volumes:
     - ./telegraf/etc:/etc/telegraf
     depends_on:
@@ -14,7 +16,9 @@ services:
 
   influxdb:
     image: influxdb:1.8-alpine
+    #image: influxdb:1.11
     #image: influxdb
+    container_name: ciena_influxdb
     env_file: configuration.env
     ports:
       - '127.0.0.1:8086:8086'
@@ -25,13 +29,15 @@ services:
   grafana:
     #image: grafana/grafana:8.0.2
     image: grafana/grafana:8.1.5
+    #image: grafana/grafana:latest
+    container_name: ciena_grafana
     depends_on:
       - influxdb
     env_file: configuration.env
     links:
       - influxdb
     ports:
-      - '127.0.0.1:3000:3000'
+      - '10.183.204.31:3000:3000'
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
